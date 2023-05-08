@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'titulo' %} Filmes ao luar | Login {% endblock %}
+
+{% block 'conteudo' %}
+<div class="containers">
+    {% if status == '1' %}
+        <div class="alert alert-danger" role="alert">
+            Email ou Senha inválidos
+        </div>
+    {% endif %}
+
+    {% if status == '2' %}
+        <div class="alert alert-danger" role="alert">
+            Faça Login antes de acessar a página
+        </div>
+    {% endif %}
+
+    <div class="form-image">
+        <img src="{% static '/img/undraw_home_cinema_l7yl.svg' %}" >
+    </div>
+    <div class="form">
+        <form method="POST" action="{% url 'valida_login' %}">{% csrf_token %}
+            <div class="form-header">
+                <div class="title">
+                    <h1>Log-in</h1>
+                </div>
+                <div class="login-button">
+                    <button><a href="{% url 'cadastrar' %}">Não tenho cadastro</a></button>
+                </div>    
+            </div>
+            <div class="input-group">
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Digite seu email" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+            </div>
+            <div class="login-button">
+                <button>Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

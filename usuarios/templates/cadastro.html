@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'titulo' %} Filmes ao luar | Cadastro {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+        <div class="alert alert-sucess flex" role="alert">
+            Cadastro realizado com sucesso
+        </div>
+    {% endif %}
+
+    {% if status == '1' %}
+        <div class="alert alert-danger" role="alert">
+            Nome e senha não podem estar vazios
+        </div>
+    {% endif %}
+
+    {% if status == '2' %}
+        <div class="alert alert-danger" role="alert">
+            A senha tem que ter no mínimo 8 caracteres
+        </div>
+    {% endif %}
+
+    {% if status == '3' %}
+        <div class="alert alert-danger" role="alert">
+            Usuário já existe no sistema
+        </div>
+    {% endif %}
+
+    {% if status == '4' %}
+        <div class="alert alert-danger" role="alert">
+            Erro no sistema
+        </div>
+    {% endif %}
+
+<div class="containers">
+    <div class="form-image">
+        <img src="{% static 'img/undraw_horror_movie_3988.svg' %}" >
+    </div>
+    <div class="form">
+        <form method="POST" action="{% url 'valida_cadastro' %}">{% csrf_token %}
+            <div class="form-header">
+                <div class="title">
+                    <h1>Cadastre-se</h1>
+                </div>
+                <div class="login-button">
+                    <button><a href="{% url 'login' %}">Já tenho cadastro</a></button>
+                </div>    
+            </div>
+            <div class="input-group">
+                <div class="input-box">
+                    <label for="firstname">Primeiro Nome</label>
+                    <input type="text" name="first_name" id="first_name" placeholder="Digite seu primeiro nome" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="lastname">Sobrenome</label>
+                    <input type="text" name="last_name" id="last_name" placeholder="Digite seu sobrenome" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Digite seu email" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="number">Celular</label>
+                    <input type="tel" name="number" id="number" placeholder="(xx) xxxxx-xxxx" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="password">Confirme sua senha</label>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Digite sua senha" required>
+                </div>
+            </div>
+
+            <div class="continue-button">
+                <button>Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
